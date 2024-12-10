@@ -32,14 +32,14 @@ export const postApi = api.injectEndpoints({
 })
 
 export const {
-    useCreatePostMutation,
-    useGetAllPostsQuery,
-    useGetPostByIdQuery,
-    useDeletePostMutation,
-    useLazyGetAllPostsQuery,
-    useLazyGetPostByIdQuery
-} = postApi;
+  useCreatePostMutation,
+  useGetAllPostsQuery,
+  useGetPostByIdQuery,
+  useDeletePostMutation,
+  useLazyGetAllPostsQuery,
+  useLazyGetPostByIdQuery,
+} = postApi
 
 export const {
-    endpoints: {createPost,getAllPosts,getPostById,deletePost}
-}= postApi;
+  endpoints: { createPost, getAllPosts, getPostById, deletePost },
+} = postApi
