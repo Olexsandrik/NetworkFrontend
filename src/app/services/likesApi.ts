@@ -12,7 +12,7 @@ export const likeApi = api.injectEndpoints({
     }),
     unlikePost: builder.mutation<void, string>({
       query: postId => ({
-        url: `/like/${postId}`,
+        url: `/likes/${postId}`,
         method: "DELETE",
       }),
     }),

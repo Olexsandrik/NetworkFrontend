@@ -13,6 +13,7 @@
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
     "type-check": "tsc --noEmit"
+    
   },
   "dependencies": {
     "@nextui-org/react": "^2.6.4",
@@ -46,5 +47,6 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.11",
     "vitest": "^1.2.0"
+    
   }
 }
