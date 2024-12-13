@@ -2,10 +2,12 @@ import React from "react"
 import { Button as NextButton } from "@nextui-org/react"
 type Props = {
   children: React.ReactNode
+  isLoading?: boolean
   icon?: JSX.Element
   className?: string
   type?: "button" | "submit" | "reset"
   fullWidth?: boolean
+
   color?:
     | "default"
     | "primary"
@@ -23,6 +25,7 @@ export const Button = ({
   fullWidth,
   icon,
   type,
+  isLoading,
 }: Props) => {
   return (
     <NextButton
@@ -33,6 +36,7 @@ export const Button = ({
       className={className}
       type={type}
       fullWidth={fullWidth}
+      isLoading={isLoading}
     >
       {children}
     </NextButton>

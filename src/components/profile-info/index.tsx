@@ -1,7 +1,17 @@
-import React from 'react'
+import React from "react"
 
-export const index = () => {
+type Props = {
+  title: string
+  info?: string
+}
+export const ProfileInfo = ({ title, info }: Props) => {
+  if (!info) {
+    return null
+  }
   return (
-    <div>index</div>
+    <p className="font-semibold">
+      <span className="text-gray-500 mr-2">{title}</span>
+      {info}
+    </p>
   )
 }
