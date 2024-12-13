@@ -3,15 +3,19 @@ import { useCreateCommentMutation } from "../../app/services/commentsApi"
 import {
   useCreatePostMutation,
   useLazyGetAllPostsQuery,
+  useLazyGetPostByIdQuery,
 } from "../../app/services/postsApi"
 import { Controller, useForm } from "react-hook-form"
 import { Button, Textarea } from "@nextui-org/react"
 import { ErrorMessage } from "../ErrorMessage"
 import { IoMdCreate } from "react-icons/io"
+import { useParams } from "react-router-dom"
 
-export const CreatePost = () => {
-  const [createPost] = useCreatePostMutation()
-  const [triggerAllPosts] = useLazyGetAllPostsQuery()
+export const CreateComment = () => {
+  const { id } = useParams<{ id: string }>()
+
+  const [createComment] = useCreateCommentMutation()
+  const [getPostById] = useLazyGetPostByIdQuery()
 
   const {
     handleSubmit,
@@ -24,9 +28,11 @@ export const CreatePost = () => {
 
   const onSubmit = handleSubmit(async data => {
     try {
-      await createPost({ content: data.post }).unwrap()
-      await triggerAllPosts().unwrap()
-      setValue("post", "")
+      if (id) {
+        await createComment({ content: data.comment, postId: id }).unwrap()
+        await getPostById(id).unwrap()  
+        setValue("comment", "")
+      }
     } catch (error) {
       console.log(error)
     }
@@ -34,7 +40,7 @@ export const CreatePost = () => {
   return (
     <form className="flex-grow" onSubmit={onSubmit}>
       <Controller
-        name="post"
+        name="comment"
         control={control}
         defaultValue=""
         rules={{
@@ -44,19 +50,19 @@ export const CreatePost = () => {
           <Textarea
             {...field}
             labelPlacement="outside"
-            placeholder="про що думаєте"
+            placeholder="Напишість свій комент"
             className="mb-5"
           />
         )}
       />
       {errors && <ErrorMessage error={error} />}
       <Button
-        color="success"
+        color="primary"
         className="flex-end"
         endContent={<IoMdCreate />}
         type="submit"
       >
-        Добавити пост
+        Відповісти
       </Button>
     </form>
   )

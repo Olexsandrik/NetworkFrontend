@@ -92,6 +92,8 @@ export const Card = ({
         : await likePost({ postId: id }).unwrap()
 
       await refetchPosts()
+      await triggerGetPostsById(id).unwrap()
+   
     } catch (error) {
       if (hasErrorField(error)) {
         setError(error.data.error)
@@ -115,7 +117,7 @@ export const Card = ({
           break
         }
         case "comment": {
-          await deleteComment(id).unwrap()
+          await deleteComment(commentId).unwrap()
           await refetchPosts()
           break
         }
