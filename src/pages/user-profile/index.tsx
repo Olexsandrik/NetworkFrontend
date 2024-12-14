@@ -25,6 +25,7 @@ import { formatToClientData } from "../../utils/format-to-client-data"
 import { CountInfo } from "../../components/count-info"
 import { api } from "../../app/services/api"
 import { EditProfile } from "../../components/edit-profile"
+import { hasErrorField } from "../../utils/has-error-field"
 
 export const UserProfile = () => {
   const { id } = useParams<{ id: string }>()
@@ -55,6 +56,20 @@ export const UserProfile = () => {
       }
     } catch (error) {
       console.log(error)
+    }
+  }
+
+  const handleClose = async () => {
+    try {
+      if (id) {
+        await triggerGetUserByIdQuery(id)
+        await triggerCurrentQuery()
+        onClose()
+      }
+    } catch (error) {
+      if (hasErrorField(error)) {
+        console.error(error.data.error)
+      }
     }
   }
   if (!data) {
@@ -113,7 +128,7 @@ export const UserProfile = () => {
             <CountInfo count={data.followers.length} title="Підписники" />
             <CountInfo count={data.following.length} title="Підписки" />
           </div>
-          <EditProfile isOpen={isOpen} onClose={onClose} user={data} />
+          <EditProfile isOpen={isOpen} onClose={handleClose} user={data} />
         </Card>
       </div>
     </>
