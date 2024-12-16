@@ -54,7 +54,7 @@ export const EditProfile = ({ isOpen, onClose, user }: Props) => {
         const formData = new FormData()
         data.name && formData.append("name", data.name)
         data.email &&
-          data.email !== user?.email &&
+          data.email &&
           formData.append("email", data.email)
         data.dateOfBirth &&
           formData.append(
