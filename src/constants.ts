@@ -1,7 +1,7 @@
 export const BASE_URL =
   process.env.NODE_ENV === "production"
-    ? "https://networkbackend-phgg.onrender.com"
-    : "https://networkbackend-phgg.onrender.com"
+    ? "https://networkbackend-lhjs.onrender.com"
+    : "https://networkbackend-lhjs.onrender.com"
 
 
 
